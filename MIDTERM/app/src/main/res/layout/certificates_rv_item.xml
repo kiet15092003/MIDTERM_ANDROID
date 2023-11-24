@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="20dp"
+    android:elevation="6dp"
+    app:cardUseCompatPadding="true"
+    app:cardBackgroundColor="@color/purple">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp">
+        <ImageView
+            android:id="@+id/iv_imgSrc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:src="@drawable/ic_certificates" />
+        <TextView
+            android:id="@+id/tv_certificates_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="IELTS"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:textColor="#000"
+            android:layout_toRightOf="@+id/iv_imgSrc"
+
+            android:layout_marginLeft="10dp"
+            />
+        <TextView
+            android:id="@+id/tv_label_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Score"
+            android:textSize="13dp"
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@+id/tv_certificates_name"
+            android:layout_marginLeft="10dp"
+            />
+        <TextView
+            android:id="@+id/tv_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="8.5"
+            android:textSize="14dp"
+            android:layout_marginTop="2dp"
+            android:textColor="#000"
+            android:layout_toRightOf="@+id/tv_label_score"
+            android:layout_marginLeft="10dp"
+            />
+        <ImageView
+            android:id="@+id/iv_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_edit_list"
+            android:layout_toRightOf="@+id/tv_score"
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="10dp"/>
+        <ImageView
+            android:id="@+id/iv_delete"
+            android:layout_marginTop="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_delete"
+            android:layout_toRightOf="@+id/iv_edit" />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

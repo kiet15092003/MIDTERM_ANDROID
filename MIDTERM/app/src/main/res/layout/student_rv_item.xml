@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="20dp"
+    android:elevation="6dp"
+    app:cardUseCompatPadding="true"
+    app:cardBackgroundColor="@color/purple"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginBottom="10dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_marginTop="35dp"
+            android:id="@+id/iv_imgSrc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher_round"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#FFFFFF"
+            app:civ_circle_background_color="#CCCCCC"
+            app:civ_border_overlay="true" />
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Student name"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textColor="#000"
+            android:layout_toRightOf="@+id/iv_imgSrc"
+            android:layout_marginLeft="10dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_class"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Student class"
+            android:textSize="16dp"
+            android:textColor="#000"
+            android:layout_toRightOf="@+id/iv_imgSrc"
+            android:layout_below="@+id/tv_name"
+            android:layout_marginLeft="10dp"
+            />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:strokeWidth="2dp"
+            app:cornerRadius="20dp"
+            android:text="View Detail"
+            android:textColor="@color/black"
+            app:strokeColor="@color/white"
+            android:layout_toRightOf="@+id/iv_imgSrc"
+            android:layout_below="@+id/tv_class"
+            android:layout_marginLeft="10dp"
+            />
+        <ImageView
+            android:id="@+id/iv_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_edit_list"
+            android:layout_toRightOf="@+id/iv_imgSrc"
+            android:layout_below="@+id/btn_detail" />
+        <ImageView
+            android:id="@+id/iv_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_delete"
+            android:layout_toRightOf="@+id/iv_edit"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@+id/btn_detail"/>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

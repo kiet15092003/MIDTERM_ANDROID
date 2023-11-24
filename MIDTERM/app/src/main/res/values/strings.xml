@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">AndroidMidterm_Firebase</string>
+    <string-array name="spinner_status_options">
+        <item>Normal</item>
+        <item>Locked</item>
+    </string-array>
+</resources>
