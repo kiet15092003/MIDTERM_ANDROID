@@ -25,6 +25,8 @@
             app:civ_border_color="#FFFFFF"
             app:civ_circle_background_color="#CCCCCC"
             app:civ_border_overlay="true" />
+
+
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"

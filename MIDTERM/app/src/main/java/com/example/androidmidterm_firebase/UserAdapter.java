@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +39,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.myViewHolder>{
         this.context = context;
         this.users = users;
     }
+
     @NonNull
     @Override
     public myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -52,6 +54,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.myViewHolder>{
         holder.contentTextView.setText(user.getPhoneNum());
         holder.iv_imgSrc.getLayoutParams().width = 150;
         holder.iv_imgSrc.getLayoutParams().height = 150;
+
         Picasso.with(holder.itemView.getContext())
                 .load(user.getImgSrc())
                 .into(holder.iv_imgSrc);
@@ -69,8 +72,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.myViewHolder>{
                 // Start the new activity with the Intent, expecting a result
                 ((Activity) context).startActivityForResult(intent,REQUEST_CODE);
             }
+
+
         });
+
     }
+
+
     private void findUserIdAndRemoveUser(String accountName) {
         // Query the database to find the user with the specified accountName
         // Remove tha account of user
@@ -135,6 +143,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.myViewHolder>{
         public ImageView iv_imgSrc;
         public ImageView iv_delete;
         public ImageView iv_edit;
+
         public myViewHolder(View view) {
             super(view);
             titleTextView = view.findViewById(R.id.tv_name);
@@ -142,6 +151,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.myViewHolder>{
             iv_imgSrc = view.findViewById(R.id.iv_imgSrc);
             iv_delete = view.findViewById(R.id.iv_delete);
             iv_edit = view.findViewById(R.id.iv_edit);
+            //iv_selectedUser.findViewById(R.id.iv_selectImgUser);
         }
     }
 }

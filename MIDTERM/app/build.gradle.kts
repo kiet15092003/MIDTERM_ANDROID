@@ -30,6 +30,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -45,7 +48,19 @@ dependencies {
     implementation("com.google.firebase:firebase-auth:21.0.1")
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation("com.google.android.material:material:1.0.0")
+    implementation("androidx.navigation:navigation-fragment:2.7.4")
+    implementation("androidx.navigation:navigation-ui:2.7.4")
+    implementation("com.google.firebase:firebase-crashlytics-buildtools:2.9.9")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    implementation("org.apache.poi:poi:4.0.0")
+    implementation("org.apache.poi:poi-ooxml:4.0.0")
+    implementation ("net.sourceforge.jexcelapi:jxl:2.6.12")
+    implementation("com.opencsv:opencsv:5.5.1")
+    implementation("androidx.appcompat:appcompat:1.3.0")
+    //implementation("org.apache.poi:poi:3.17")
+    //implementation("org.apache.poi:poi-ooxml:3.173")
+
+
 }

@@ -20,25 +20,204 @@
         android:background="@color/purple">
     </androidx.appcompat.widget.Toolbar>
 
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/byname"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/black"
+            android:text="Name"
+            android:onClick="onByNameClick"
+            android:clickable="true">
+
+        </TextView>
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/black"
+            android:text="|">
+
+        </TextView>
+        <TextView
+            android:id="@+id/byclass"
+            android:layout_width="wrap_content"
+            android:text="Class"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:onClick="onByClassClick"
+            android:clickable="true"
+            >
+
+        </TextView>
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/black"
+            android:text="|">
+
+        </TextView>
+        <TextView
+            android:id="@+id/byage"
+            android:layout_width="wrap_content"
+            android:text="Age"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:onClick="onByAgeClick"
+            android:clickable="true"
+            >
+
+        </TextView>
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/black"
+            android:text="|">
+
+        </TextView>
+        <TextView
+            android:id="@+id/byscore"
+            android:layout_width="wrap_content"
+            android:text="Score"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:onClick="onByScoreClick"
+            android:clickable="true"
+            >
+
+        </TextView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="end"
+            android:layout_height="wrap_content">
+            <Spinner
+                android:id="@+id/snpsort"
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content">
+            </Spinner>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+   <androidx.cardview.widget.CardView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+
+       android:layout_marginTop="10dp"
+       android:layout_marginLeft="30dp"
+       android:layout_marginRight="30dp"
+       android:background="@color/white"
+       app:cardCornerRadius="10dp"
+       app:cardElevation="20dp">
+
+       <LinearLayout
+
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal">
+
+           <EditText
+               android:id="@+id/studentsearch"
+               android:layout_width="310dp"
+               android:layout_height="wrap_content">
+
+           </EditText>
+
+           <ImageView
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:src="@drawable/baseline_search_24">
+
+           </ImageView>
+
+       </LinearLayout>
+
+
+   </androidx.cardview.widget.CardView>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
         app:cardCornerRadius="30dp"
         app:cardElevation="20dp"
+        android:backgroundTint="@color/white"
         >
+
         <LinearLayout
+            android:backgroundTint="@color/white"
+
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="400dp"
             android:orientation="vertical"
+            android:background="@color/white"
             android:layout_gravity="center_horizontal"
             android:padding="10dp">
             <androidx.recyclerview.widget.RecyclerView
+                android:backgroundTint="@color/white"
+
                 android:id="@+id/rv_student"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar"
                 tools:layout_editor_absoluteX="1dp" />
         </LinearLayout>
+
     </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+
+        app:cardElevation="20dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_weight="1"
+                android:id="@+id/btnImportStudent"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/purple"
+                android:text="Import student"
+                android:textSize="10dp"
+                app:cornerRadius="5dp" />
+            <Button
+                android:id="@+id/btnExportStudent"
+                android:layout_weight="1"
+               android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+
+                android:backgroundTint="@color/purple"
+                android:text="Export student"
+                android:textSize="10dp"
+                app:cornerRadius="5dp" />
+
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
 </LinearLayout>

@@ -1,7 +1,9 @@
 package com.example.androidmidterm_firebase;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -9,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,8 +24,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.opencsv.CSVWriter;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +42,7 @@ public class StudentDetailActivity extends AppCompatActivity {
     MaterialButton btn_add_certificate;
     String studentId;
     CircleImageView imv_Img;
+    Button btn_Export_chungchi;
     private static final int REQUEST_CODE = 1;
     private static final int REQUEST_CODE_EDIT = 2;
     @Override
@@ -50,6 +58,7 @@ public class StudentDetailActivity extends AppCompatActivity {
         btn_add_certificate = findViewById(R.id.btn_add_certificate);
         imv_Img = findViewById(R.id.iv_imgSrc);
         Intent intent = getIntent();
+        ExportFileChungchi();
         // Retrieve the data from the Intent using the key
         String intentValue = intent.getStringExtra("studentId");
         studentId = intentValue;
@@ -81,6 +90,81 @@ public class StudentDetailActivity extends AppCompatActivity {
                 } else{
                     Toast.makeText(StudentDetailActivity.this, "user don't have permission to do this task", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+    }
+    @RequiresApi(api = Build.VERSION_CODES.R)
+    public void exportToCsv() {
+
+
+        String folderName = "CerticateActivity"; // Tên thư mục bạn muốn tạo
+        String fileName = "file.csv";
+
+        // Sử dụng DIRECTORY_DOCUMENTS thay vì DIRECTORY_DOWNLOADS
+        File appDirectory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), folderName);
+
+        if (!appDirectory.exists()) {
+            appDirectory.mkdirs();
+            //Toast.makeText(this, "1", Toast.LENGTH_SHORT).show();
+            // Sử dụng mkdirs() để tạo cả thư mục cha nếu cần
+        }
+        Toast.makeText(this, "Export successfully", Toast.LENGTH_SHORT).show();
+
+        String filePath = appDirectory.getPath() + "/" + fileName;
+
+        List<CertificateModel> chungchis = new ArrayList<>();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("certificates");
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    CertificateModel certificateModel = userSnapshot.getValue(CertificateModel.class);
+                    chungchis.add(certificateModel);
+                }
+
+                try (CSVWriter writer = new CSVWriter(new FileWriter(new File(filePath)))) {
+                    // Header
+                    String[] header = {"Name Certificate","Score"};
+                    writer.writeNext(header);
+
+                    // Data
+                    for (CertificateModel cer : chungchis) {
+
+                        if(cer.getStudentId().equals(studentId)){
+
+                            String[] data = {
+                                    cer.getCertificateName(),
+
+                                    String.valueOf(cer.getScore())
+
+                            };
+                            writer.writeNext(data);
+                        }
+
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Xử lý lỗi nếu cần
+            }
+        });
+
+
+
+
+
+    }
+
+    public void ExportFileChungchi(){
+        btn_Export_chungchi = findViewById(R.id.ExportFile);
+        btn_Export_chungchi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                exportToCsv();
             }
         });
     }

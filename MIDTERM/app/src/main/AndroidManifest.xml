@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,23 +15,33 @@
         android:theme="@style/Theme.AndroidMidterm_Firebase"
         tools:targetApi="31">
         <activity
+            android:name=".CustomeSnipperActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CustomespinnerActivity"
+            android:exported="false"
+            android:label="@string/title_activity_customespinner"
+            android:theme="@style/Theme.AndroidMidterm_Firebase" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="LoginActivity" />
-        <activity android:name="AddUserActivity" />
-        <activity android:name="EditUserActivity" />
-        <activity android:name="ProfileActivity" />
-        <activity android:name="LoginHistoryActivity" />
-        <activity android:name="StudentListActivity" />
-        <activity android:name="StudentDetailActivity"/>
-        <activity android:name="AddStudentActivity"/>
-        <activity android:name="AddCertificateActivity"/>
-        <activity android:name="EditStudentActivity"/>
-        <activity android:name="EditCertificateActivity"/>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".AddUserActivity" />
+        <activity android:name=".EditUserActivity" />
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".LoginHistoryActivity" />
+        <activity android:name=".StudentListActivity" />
+        <activity android:name=".StudentDetailActivity" />
+        <activity android:name=".AddStudentActivity" />
+        <activity android:name=".AddCertificateActivity" />
+        <activity android:name=".EditStudentActivity" />
+        <activity android:name=".EditCertificateActivity" />
     </application>
+
 </manifest>

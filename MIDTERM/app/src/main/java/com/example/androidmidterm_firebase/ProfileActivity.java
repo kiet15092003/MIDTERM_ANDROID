@@ -1,11 +1,19 @@
 package com.example.androidmidterm_firebase;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +38,11 @@ public class ProfileActivity extends AppCompatActivity {
     MaterialButton btnLogout;
     Button btnBackToList;
     CircleImageView imv_Img;
+    ImageButton btnEditImg;
+    private static final int PICK_IMAGE_REQUEST = 1;
+    private static final int PERMISSION_REQUEST_CODE = 123;
+    private static final String PREFS_NAME = "MyPrefsFile";
+    private Uri selectedImageUri2;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,9 +56,13 @@ public class ProfileActivity extends AppCompatActivity {
         btnBackToList = findViewById(R.id.btnBackToList);
         imv_Img = findViewById(R.id.iv_imgSrc);
         Intent intent = getIntent();
+        //tvName.setText("abc");
+
+
         // Retrieve the data from the Intent using the key
         String userName = intent.getStringExtra("userName");
         EditUserInformation(userName);
+
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,6 +86,48 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void ChangeProfileImg(){
+        imv_Img = findViewById(R.id.iv_imgSrc);
+        btnEditImg = findViewById(R.id.iv_selectImgUser);
+        btnEditImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, PICK_IMAGE_REQUEST);
+
+            }
+        });
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
+            // Xử lý kết quả trả về từ trình chọn ảnh
+            Uri selectedImageUri = data.getData();
+            selectedImageUri2 = data.getData();
+            if (selectedImageUri != null) {
+
+                saveImageUri(selectedImageUri);
+
+                // Hiển thị ảnh đã chọn lên ImageView
+                Picasso.with(ProfileActivity.this)
+                        .load(selectedImageUri.toString())
+                        .into(imv_Img);
+            }
+        }
+    }
+    private void saveImageUri(Uri imageUri) {
+        // Save the image URI using SharedPreferences
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("selectedImageUri", imageUri.toString());
+        editor.apply();
+    }
+
+
     public void EditUserInformation(String accountName){
         DatabaseReference usersReference = FirebaseDatabase.getInstance().getReference().child("users");
         usersReference.orderByChild("userName").equalTo(accountName).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -99,9 +158,24 @@ public class ProfileActivity extends AppCompatActivity {
                                 }
                                 imv_Img.getLayoutParams().width = 250;
                                 imv_Img.getLayoutParams().height = 250;
-                                Picasso.with(ProfileActivity.this)
-                                        .load(imgSrc)
-                                        .into(imv_Img);
+                                ChangeProfileImg();
+                                // Load the saved image URI when the activity is created
+                                SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+                                String savedImageUriString = preferences.getString("selectedImageUri", null);
+                                //requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
+                                //tvName.setText(savedImageUriString);
+                                if (savedImageUriString != null) {
+
+                                    Picasso.with(ProfileActivity.this)
+                                            .load(savedImageUriString)  // Load the saved image URI using Picasso
+                                            .into(imv_Img);
+                                }
+                                else {
+                                    Picasso.with(ProfileActivity.this)
+                                            .load(imgSrc)
+                                            .into(imv_Img);
+                                }
+
                             }
                         }
                         @Override
